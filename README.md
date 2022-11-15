@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [https://github.com/akshaypatel99/frontend-mentor/tree/main/crowdfunding-product-page](https://github.com/akshaypatel99/frontend-mentor/tree/main/crowdfunding-product-page)
+- Solution URL: [https://github.com/akshaypatel99/crowdfunding-product-page](https://github.com/akshaypatel99/crowdfunding-product-page)
 - Live Site URL: [https://akshaypatel99.github.io/crowdfunding-product-page/](https://akshaypatel99.github.io/crowdfunding-product-page/)
 
 ## My process
