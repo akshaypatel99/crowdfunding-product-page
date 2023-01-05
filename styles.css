@@ -130,11 +130,14 @@ dialog::backdrop {
 
 .sr-only {
   position: absolute;
-  left: -10000px;
-  top: auto;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Header & Nav */
@@ -143,7 +146,6 @@ dialog::backdrop {
   width: 100%;
   position: relative;
   display: flex;
-  justify-content: space-between;
   padding: 1.5rem 1rem 4rem;
   background: linear-gradient(180deg, hsla(0, 100%, 0%, 0.5), transparent);
 }
@@ -161,13 +163,15 @@ dialog::backdrop {
   display: block;
 }
 
-.mobile-menu-control {
+.mobile-nav-toggle {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  position: absolute;
+  right: 1rem;
 }
 
-.mobile-menu-control img {
+.mobile-nav-toggle img {
   z-index: 20;
 }
 
@@ -176,8 +180,11 @@ dialog::backdrop {
   position: absolute;
   top: 6rem;
   right: 1.5rem;
+  transform: translateY(100%);
+  visibility: hidden;
+  opacity: 0;
   background-color: white;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
@@ -196,6 +203,13 @@ dialog::backdrop {
     0px 112.5px 45px rgba(0, 0, 0, 0.079),
     0px 200px 80px rgba(0, 0, 0, 0.1)
   ;
+  transition: all 500ms ease-in-out;
+}
+
+.menu[data-visible='true']{
+  visibility: visible;  
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .menu li {
@@ -267,10 +281,18 @@ main > * {
   padding: 1.125rem 2.5rem;
 }
 
-#bookmark {
+.bookmark {
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+.bookmark[data-bookmarked='true'] svg circle {
+  fill: var(--dark-cyan);
+}
+
+.bookmark[data-bookmarked='true'] svg path {
+  fill: white;
 }
 
 .bookmark-span {
@@ -280,6 +302,12 @@ main > * {
   width: 1px;
   height: 1px;
   overflow: hidden;
+  color: var(--dark-gray);
+
+}
+
+.bookmark[data-bookmarked='true'] .bookmark-span {
+  color: var(--dark-cyan);
 }
 
 /* Dashboard */
@@ -494,9 +522,10 @@ main > * {
   .nav-header {
     max-width: 1200px;
     padding: 2.5rem 2rem 4rem;
+    justify-content: space-between;
   }
 
-  .mobile-menu-control {
+  .mobile-nav-toggle {
     display: none;
   }
 
@@ -554,16 +583,18 @@ main > * {
     margin-top: 0.5rem;
   }
 
-  #bookmark {
+  .bookmark {
     background-color: hsl(0, 0%, 96%);
     border-radius: 100px;
     display: flex;
     align-items: center;
   }
 
-  #bookmark:hover {
+  .bookmark:hover {
     opacity: 0.8;
   }
+
+
 
   .bookmark-span {
     position: relative;
@@ -576,8 +607,9 @@ main > * {
     font-size: 0.9rem;
     padding: 1rem 1.5rem;
     border-radius: 100px;
-    color: var(--dark-gray);
   }
+
+
 
   /* Dashboard */
   .stats {

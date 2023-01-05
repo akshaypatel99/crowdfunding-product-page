@@ -8,6 +8,10 @@ let state = {
 	bookmarked: false,
 };
 
+// Set bookmark status
+const bookmarkBtn = document.getElementById('bookmark');
+bookmarkBtn.setAttribute('data-bookmarked', state.bookmarked);
+
 // Set Dashboard Metrics
 document.getElementById(
 	'raised'
@@ -187,30 +191,35 @@ dialogOption.forEach((option) => {
 
 // Menu
 
-let menuBtn = document.getElementById('menu-button');
+let menuBtn = document.getElementById('mobile-nav-toggle');
 let menu = document.getElementById('menu');
-let overlay = document.getElementById('overlay');
 
 menuBtn.addEventListener('click', () => {
-	menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-	overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+	const visibility = menu.getAttribute('data-visible');
+
+	if (visibility === 'false') {
+		menu.setAttribute('data-visible', true);
+		menuBtn.setAttribute('aria-expanded', true);
+	} else {
+		menu.setAttribute('data-visible', false);
+		menuBtn.setAttribute('aria-expanded', false);
+	}
 });
 
 // Bookmark
 
 function bookmark() {
-	if (!state.bookmarked) {
+	const bookmarkBtn = document.getElementById('bookmark');
+	const bookmarkText = document.querySelector('.bookmark-span');
+	const bookmarked = bookmarkBtn.getAttribute('data-bookmarked');
+
+	if (bookmarked === 'false') {
 		state.bookmarked = true;
-
-		// Update button inner text
-		const bookmarkBtn = document.getElementById('bookmark');
-		bookmarkBtn.children[1].innerText = 'Bookmarked';
-		bookmarkBtn.children[1].style.color = 'var(--dark-cyan)';
-
-		// Update svg circle and path fill color
-		bookmarkBtn.children[0].children[0].children[0].style.fill =
-			'var(--dark-cyan)';
-		bookmarkBtn.children[0].children[0].children[1].style.fill = 'white';
+		bookmarkBtn.setAttribute('data-bookmarked', true);
+		bookmarkText.innerText = 'Bookmarked';
+	} else {
+		state.bookmarked = false;
+		bookmarkBtn.setAttribute('data-bookmarked', false);
+		bookmarkText.innerText = 'Bookmark';
 	}
-	return;
 }

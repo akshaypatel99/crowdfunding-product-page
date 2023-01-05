@@ -42,15 +42,20 @@
 			<div class="logo-container">
 				<img src="./images/logo.svg" alt="crowdfund logo" />
 			</div>
+			<button
+				id="mobile-nav-toggle"
+				class="mobile-nav-toggle"
+				aria-controls="menu"
+				aria-expanded="false">
+				<img
+					src="./images/icon-hamburger.svg"
+					alt=""
+					id="toggle-menu"
+					class="toggle-menu" />
+				<span class="sr-only">Menu</span>
+			</button>
 			<nav>
-				<button id="menu-button" class="mobile-menu-control">
-					<img
-						src="./images/icon-hamburger.svg"
-						alt="toggle menu"
-						id="toggle-menu"
-						class="toggle-menu" />
-				</button>
-				<ul class="menu" id="menu">
+				<ul class="menu" id="menu" data-visible="false">
 					<li><a href="#">About</a></li>
 					<li><a href="#">Discover</a></li>
 					<li><a href="#">Get Started</a></li>
@@ -79,7 +84,12 @@
 							type="button">
 							Back this project
 						</button>
-						<button id="bookmark" type="button" onclick="bookmark()">
+						<button
+							id="bookmark"
+							class="bookmark"
+							type="button"
+							onclick="bookmark()"
+							data-bookmarked="false">
 							<svg width="56" height="56" xmlns="http://www.w3.org/2000/svg">
 								<g fill="none" fill-rule="evenodd">
 									<circle fill="#2F2F2F" cx="28" cy="28" r="28" />
